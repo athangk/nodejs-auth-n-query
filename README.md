@@ -1,3 +1,3 @@
 # auth-n-query
 
-Demo nodejs project with authentication and database queries using events
+Demo nodejs project event-driven with authentication and database queries
