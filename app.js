@@ -14,7 +14,9 @@ app.use(express.json());
 
 app.use('/users', usersRouter);
 
-app.post("/welcome", auth, (req, res) => {
+
+// TODO: fix with a query
+app.get("/registeredUsers", auth, (req, res) => {
   res.status(200).send("Welcome 🙌 ");
 });
 

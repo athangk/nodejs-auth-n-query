@@ -1,8 +1,6 @@
 var userService = require('../services/user.services')    
 
 const getUsers = async function (req, res, next) {
-    // Validate request parameters, queries using express-validator
-    
     var page = req.params.page ? req.params.page : 1;
     var limit = req.params.limit ? req.params.limit : 10;
     try {
@@ -14,7 +12,6 @@ const getUsers = async function (req, res, next) {
 }
 
 const register = async function (req, res, next) {
-    console.log("INSIDE USER CONTROLLER")
    try {
    const user = await userService.register(req,res,next)
    res.status(201).json(user);
@@ -26,8 +23,6 @@ const register = async function (req, res, next) {
 
 
 const login = async function (req, res, next) {
-    console.log("INSIDE USER CONTROLLER")
-
     try {
      const user = await userService.login(req,res,next)
      res.status(200).json(user); 
@@ -35,7 +30,6 @@ const login = async function (req, res, next) {
       console.log(err);
       res.status(400).json({ status: 400, message: e.message });
     }
-    // Our register logic ends here
  }
 
 

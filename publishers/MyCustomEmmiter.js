@@ -1,4 +1,7 @@
-class MyCustomEmmiter {
+
+// TODO: fix on proper folder
+
+class MyCustomEmitter {
   constructor(name, eventEmitter) {
     this.name = name
     this.eventEmitter = eventEmitter
@@ -10,4 +13,4 @@ class MyCustomEmmiter {
   }
 }
 
-module.exports = MyCustomEmmiter
+module.exports = MyCustomEmitter
