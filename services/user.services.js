@@ -22,3 +22,7 @@ exports.register = async function (query, page, limit) {
         throw Error('Error while Paginating Users')
     }
 }
+
+exports.useEmitter = function() {
+    console.log("i am emmited")
+}

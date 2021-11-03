@@ -2,6 +2,10 @@ const bcrypt = require('bcrypt');
 const jwt = require("jsonwebtoken");
 // importing user context
 const User = require("../models/user");
+var userServices = require('../services/user.services')
+var MyCustomEmmiter = require('../subscribers/MyCustomEmmiter')
+var myCustomSubscriber = require('../subscribers/MyCustomSubscriber')
+
 
 var UserService = require('../services/user.services')    
 
@@ -101,6 +105,14 @@ exports.login = async function (req, res, next) {
         // save user token
         user.token = token;
   
+        console.log("do i emit?")
+        var mcs= myCustomSubscriber.MyCustomSubscriber()
+        var mce = new MyCustomEmmiter('name',mcs)
+        mce.attend()
+        console.log("do i emit? 2")
+          var countEmmiter = mcs.listenerCount('event1')
+          console.log("whats the countEmmiter ?",countEmmiter)
+          var rmcs= myCustomSubscriber.MyCustomUnSubscriber(mcs)
         // user
         res.status(200).json(user);
       } else {
