@@ -1,4 +1,4 @@
-const jwt = require("jsonwebtoken");
+const jwtService = require("../services/jwt.services")
 
 const config = process.env;
 
@@ -12,13 +12,9 @@ const verifyToken = (req, res, next) => {
   }
   try {
     const bearerToken = token.replace("Bearer ","")
-    console.log("whats the bearerToken ? ", bearerToken, config.TOKEN_KEY);
-    const decoded = jwt.verify(bearerToken, config.TOKEN_KEY);
-    console.log(22);
-    console.log("whats the decoded? ",decoded)
+    const decoded = jwtService.verifyToken(bearerToken, config.TOKEN_KEY);
     req.user = decoded;
   } catch (err) {
-      console.log("Whats the err? ",err);
     return res.status(401).send("Invalid Token");
   }
   return next();
