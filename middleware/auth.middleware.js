@@ -2,7 +2,7 @@ const jwtService = require("../services/jwt.services")
 
 const config = process.env;
 
-const verifyToken = (req, res, next) => {
+const auth = (req, res, next) => {
  
   const token =
     req.body.token || req.query.token || req.headers["authorization"];
@@ -21,4 +21,4 @@ const verifyToken = (req, res, next) => {
 };
 
 
-module.exports = verifyToken;
+module.exports = auth;
