@@ -1,4 +1,4 @@
-const mailService = require("../services/mail.service")
+const mailService = require("../services/mail.services")
 
 
 var events = require('events');
@@ -11,18 +11,18 @@ const deployRegistrationEmail = () => {
     removeEmitter()
 }
 
+const registerEmitter = () =>{
+    eventEmitter.on("sendRegistrationMail",mailService.sendRegistrationEmail)
+}
 
 const invokeEmitter = () =>{
     eventEmitter.emit("sendRegistrationMail")
 }
 
-const registerEmitter = () =>{
-    eventEmitter.on("sendRegistrationMail",mailService.sendRegistrationEmail)
-}
 
 const removeEmitter = () =>{
    console.log("mcs count " + eventEmitter.listenerCount("sendRegistrationMail"))
    eventEmitter.removeListener("sendRegistrationMail",mailService.sendRegistrationEmail)
 }
 
-module.exports = { deployRegistrationEmail }
+module.exports = { deployRegistrationEmail}

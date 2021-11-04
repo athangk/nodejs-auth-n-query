@@ -1,5 +1,3 @@
-
-
 const jwtService = require("../services/jwt.services")
 
 const config = process.env;

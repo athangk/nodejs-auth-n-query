@@ -1,13 +1,8 @@
-const eventService = require("../services/event.services")
+const eventService = require("../subscribers/mail.events")
 const bcrypt = require("bcrypt")
 
-
-
-
-// importing user context
-
 var jwtService = require("./jwt.services")
-var dbService = require("./database.service")
+var dbService = require("./database.services")
 
 const register = async (user) => {
   const { first_name, last_name, email, password } = user
