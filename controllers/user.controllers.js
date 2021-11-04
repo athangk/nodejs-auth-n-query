@@ -1,4 +1,6 @@
-var userService = require('../services/user.services')    
+const userService = require("../services/user.services")
+
+
 
 const getUsers = async function (req, res, next) {
     var page = req.params.page ? req.params.page : 1;
@@ -13,8 +15,9 @@ const getUsers = async function (req, res, next) {
 
 const register = async function (req, res, next) {
    try {
-   const user = await userService.register(req,res,next)
-   res.status(201).json(user);
+  const user = req.body
+   const userResult = await userService.register(user)
+   res.status(201).json(userResult);
   } catch (err) {
     console.log(err);
     res.status(400).json({ status: 400, message: e.message });
@@ -24,8 +27,11 @@ const register = async function (req, res, next) {
 
 const login = async function (req, res, next) {
     try {
-     const user = await userService.login(req,res,next)
-     res.status(200).json(user); 
+      const user = req.body
+      console.log("user on controller ", user);
+     const userResult = await userService.login(user)
+
+     res.status(200).json(userResult); 
     } catch (err) {
       console.log(err);
       res.status(400).json({ status: 400, message: e.message });

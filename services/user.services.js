@@ -1,83 +1,73 @@
+const eventService = require("../services/event.services")
 const bcrypt = require("bcrypt")
+
+
+
 
 // importing user context
 
-var User = require("../models/user")
-var jwt = require("./jwt.services")
+var jwtService = require("./jwt.services")
+var dbService = require("./database.service")
 
-const getUsers = async function (query, page, limit) {
+const register = async (user) => {
+  const { first_name, last_name, email, password } = user
   try {
-    var users = await User.find(query)
-    return users
-  } catch (e) {
-    throw Error("Error while Paginating Users")
-  }
-}
-
-const register = async (req, res, next) => {
-  try {
-    const { first_name, last_name, email, password } = req.body
     if (!(email && password && first_name && last_name)) {
       throw Error("Error missing fields ")
     }
 
-    const userExists = await User.findOne({ email })
+    const userExist = await dbService.findUserByEmail(email)
 
-    if (userExists) {
+    if (userExist) {
       throw Error("Error user exists ")
     }
 
     encryptedPassword = await bcrypt.hash(password, 10)
+    console.log(first_name, last_name, email, encryptedPassword)
+    const userRecord = await dbService.createUser(first_name, last_name, email, encryptedPassword)
+    console.log("userRecord ", userRecord)
+    const tokenSigned = jwtService.createToken(userRecord._id, email)
+    dbService.updateUser(email, tokenSigned)
 
-    const user = await User.create({
-      first_name,
-      last_name,
-      email: email.toLowerCase(),
-      password: encryptedPassword,
-      token: "",
-    })
+    userRecord.token = tokenSigned
 
-    const tokenSigned = jwt.createToken(user._id, email)
-
-    await User.updateOne(
-      {
-        email: email,
-      },
-      { token: tokenSigned },
-      { upsert: true }
-    )
-
-    user.token = tokenSigned
-
-    return user
+    return userRecord
   } catch (e) {
     throw Error("Error: " + e)
   }
 }
 
-const login = async (req, res, next) => {
+const login = async (user) => {
   // Get user input
-  const { email, password } = req.body
-  // Validate user input
-  if (!(email && password)) {
-    throw Error("Error missing fields ")
-  }
+  console.log("user on service ", user)
+  const { email, password } = user
+  try {
+    // Validate user input
+    if (!(email && password)) {
+      throw Error("Error missing fields ")
+    }
 
-  const user = await User.findOne({ email })
-  const isValidPassword = await bcrypt.compare(password, user.password)
+    const userRecord = await dbService.findUserByEmail(email)
+    console.log("whats the userRecord", userRecord)
+    const isValidPassword = await bcrypt.compare(password, userRecord.password)
 
-  if (user && isValidPassword) {
-    const token = jwt.signToken(user._id, email)
-    user.token = token
+    if (user && isValidPassword) {
+      const token = jwtService.signToken(user._id, email)
+      user.token = token
 
-    return user
-  } else {
+     eventService.deployRegistrationEmail()
+   
+      return user
+    } else {
+      throw Error("Error: user invalid")
+    }
+  } catch (e) {
     throw Error("Error: " + e)
   }
 }
 
-const useEmitter = function () {
-    console.log("i am emmited")
-  }
+const useEmitter = () => {
+  console.log("i am emmited")
+}
 
 module.exports = { register, login, useEmitter }
