@@ -1,3 +1,3 @@
 # auth-n-query
 
-Demo nodejs project with event-driven, jwt authentication and database queries
+Demo nodejs project jwt authentication, database queries and event emitter.
