@@ -1,8 +1,10 @@
-const eventService = require("../subscribers/mail.events")
+const eventAnalyticService = require("../subscribers/analytic-events")
+const eventMailService = require("../subscribers/mail-events")
+
 const bcrypt = require("bcrypt")
 
-var jwtService = require("./jwt.services")
-var dbService = require("./database.services")
+var jwtService = require("./jwt-service")
+var dbService = require("./database-service")
 
 const register = async (user) => {
   const { first_name, last_name, email, password } = user
@@ -18,9 +20,9 @@ const register = async (user) => {
     }
 
     encryptedPassword = await bcrypt.hash(password, 10)
-    console.log(first_name, last_name, email, encryptedPassword)
+
     const userRecord = await dbService.createUser(first_name, last_name, email, encryptedPassword)
-    console.log("userRecord ", userRecord)
+
     const tokenSigned = jwtService.createToken(userRecord._id, email)
     dbService.updateUser(email, tokenSigned)
 
@@ -33,8 +35,6 @@ const register = async (user) => {
 }
 
 const login = async (user) => {
-  // Get user input
-  console.log("user on service ", user)
   const { email, password } = user
   try {
     // Validate user input
@@ -43,16 +43,22 @@ const login = async (user) => {
     }
 
     const userRecord = await dbService.findUserByEmail(email)
-    console.log("whats the userRecord", userRecord)
+
     const isValidPassword = await bcrypt.compare(password, userRecord.password)
 
-    if (user && isValidPassword) {
-      const token = jwtService.signToken(user._id, email)
-      user.token = token
+    if (userRecord && isValidPassword) {
+      const signedToken = jwtService.signToken(userRecord._id, email)
 
-     eventService.deployRegistrationEmail()
-   
-      return user
+      dbService.updateUser(email, signedToken)
+
+      userRecord.token = signedToken
+
+      setTimeout(() => {
+        eventAnalyticService.updateAnalyticStats(email)
+        eventMailService.deployRegistrationEmail(email)
+      }, 2000)
+
+      return userRecord
     } else {
       throw Error("Error: user invalid")
     }
@@ -61,8 +67,4 @@ const login = async (user) => {
   }
 }
 
-const useEmitter = () => {
-  console.log("i am emmited")
-}
-
-module.exports = { register, login, useEmitter }
+module.exports = { register, login }
