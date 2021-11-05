@@ -17,7 +17,7 @@ Based on valid bearer token user can go to specific auth route
 </p>
 
 #### Update user analytics via event emitter
-Whenever user logins analytics document gets updated
+Whenever user logins, the logins field gets updated with the current timestamp
 <p float="left">
-<img src="https://github.com/athangk/auth-n-query/blob/main/Capture_4_user_analytic.JPG" height="250">
+<img src="https://github.com/athangk/auth-n-query/blob/main/Capture_4_user_analytic.JPG" width="350">
 </p>
