@@ -6,18 +6,18 @@ Demo nodejs project jwt authentication, auth middleware for specific route, mong
 #### Register and login
 Token is generated and exported
 <p float="left">
-<img src="https://github.com/athangk/auth-n-query/blob/main/Capture_1_register.JPG" height="500">
-<img src="https://github.com/athangk/auth-n-query/blob/main/Capture_2_login.JPG" height="500">
+<img src="https://github.com/athangk/auth-n-query/blob/main/Capture_1_register.JPG" height="250">
+<img src="https://github.com/athangk/auth-n-query/blob/main/Capture_2_login.JPG" height="250">
 </p>
   
 #### Auth Middleware
 Based on valid bearer token user can go to specific auth route
 <p float="left">
-<img src="https://github.com/athangk/auth-n-query/blob/main/Capture_3_auth_middleware.JPG" height="500">
+<img src="https://github.com/athangk/auth-n-query/blob/main/Capture_3_auth_middleware.JPG" height="250">
 </p>
 
 #### Update user analytics via event emitter
 Whenever user logins analytics document gets updated
 <p float="left">
-<img src="https://github.com/athangk/auth-n-query/blob/main/Capture_4_user_analytic.JPG" height="500">
+<img src="https://github.com/athangk/auth-n-query/blob/main/Capture_4_user_analytic.JPG" height="250">
 </p>
