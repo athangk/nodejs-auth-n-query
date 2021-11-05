@@ -1,6 +1,6 @@
 # auth-n-query
 
-Demo nodejs project jwt authentication, auth middleware for specific route, mongo database queries and event emitter for non sycnhronous procedures like analytics and a demo sending email service to newly registered users.
+Demo nodejs project jwt authentication, auth middleware for specific route, mongo database queries and event emitter for non sycnhronous procedures like analytics and a demo sending email service.
 
 
 #### Register and login
@@ -14,4 +14,10 @@ Token is generated and exported
 Based on valid bearer token user can go to specific auth route
 <p float="left">
 <img src="https://github.com/athangk/auth-n-query/blob/main/Capture_3_auth_middleware.JPG" height="500">
+</p>
+
+#### Update user analytics via event emitter
+Whenever user logins analytics document gets updated
+<p float="left">
+<img src="https://github.com/athangk/auth-n-query/blob/main/Capture_4_user_analytic.JPG" height="500">
 </p>
