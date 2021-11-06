@@ -23,7 +23,7 @@ const removeEmitter = () => {
 }
 
 const sendRegistrationEmail = (mail) => {
-  mailService.sendRegistrationEmail(mail)
+  mailService.sendEmail(mail)
 }
 
 module.exports = { deployRegistrationEmail }

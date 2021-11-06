@@ -1,5 +1,4 @@
 const analyticService = require("../services/analytic-service")
-const mailService = require("../services/mail-service")
 
 var events = require("events")
 var eventEmitter = new events.EventEmitter()

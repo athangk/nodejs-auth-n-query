@@ -1,0 +1,116 @@
+{
+	"info": {
+		"_postman_id": "e32b17e0-0273-4895-ba74-e8937d785e19",
+		"name": "auth-n-query",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Register user",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-",
+						"value": "$2b$10$0Ac0E5KsJM6Ckgo.0xc1hukTrO2j6Eew6dmnFCV11JYDLJUi81YZK",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"first_name\":\"demoUserFirstName\",\r\n    \"last_name\":\"demoUserLastName\",\r\n    \"email\": \"demouser@demousernotexist.com\",\r\n    \"password\":\"1234\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/users/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login user",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-",
+						"value": "$2b$10$0Ac0E5KsJM6Ckgo.0xc1hukTrO2j6Eew6dmnFCV11JYDLJUi81YZK",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"demouser@demousernotexist.com\",\r\n    \"password\":\"1234\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/users/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Navigate to authenticated route",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjE4NjQyNDI2ZmUyYWE4YjJhZjhmNjczIiwiZW1haWwiOiJkZW1vdXNlckBkZW1vdXNlcm5vdGV4aXN0LmNvbSIsImlhdCI6MTYzNjE4ODc2MSwiZXhwIjoxNjM2MjE3NTYxfQ.m6igHXgsoyMV87gJw4su1ZtWJ3ohD3ZbyMEB4dUF9iE",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/welcome",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"welcome"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
