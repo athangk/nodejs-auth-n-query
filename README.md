@@ -1,6 +1,6 @@
 # auth-n-query
 
-Demo nodejs project with jwt authentication, auth middleware for specific route, mongo database queries and event emitter for non required awaiting procedures like adding analytics and a demo sending email service.
+Demo nodejs project with jwt authentication, auth middleware for specific route, mongo database queries, event emitter for non required awaiting procedures like adding analytics and a demo sending email service.
 
 
 #### Register and login
@@ -21,3 +21,7 @@ Whenever user logins, the current timestamp is pushed to the logins array field
 <p float="left">
 <img src="https://github.com/athangk/auth-n-query/blob/main/Capture_4_user_analytic.JPG" width="350">
 </p>
+
+#### Postman collection
+Included
+<a href="https://github.com/athangk/auth-n-query/blob/main/auth-n-query.postman_collection.json">auth-n-query.postman_collection.json</a>
