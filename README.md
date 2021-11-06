@@ -1,4 +1,4 @@
-# auth-n-query
+# nodejs-auth-n-query
 
 Demo nodejs project with jwt authentication, auth middleware for specific route, mongo database queries, event emitter for non required awaiting procedures like adding analytics and a demo sending email service.
 
